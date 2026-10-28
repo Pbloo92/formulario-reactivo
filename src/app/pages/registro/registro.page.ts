@@ -79,10 +79,16 @@ export class RegistroPage {
     }
   }
 
-  alternarModoOscuro(): void {
-    this.modoOscuro.update(value => !value);
-    document.body.classList.toggle('dark', this.modoOscuro());
-  }
+
+alternarModoOscuro(): void {
+  this.modoOscuro.update(value => !value);
+
+  document.body.classList.toggle(
+    'ion-palette-dark',
+    this.modoOscuro()
+  );
+}
+
 
   descargarPDF(): void {
     if (!this.datosEnviados) return;
