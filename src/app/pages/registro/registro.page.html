@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Registro de usuario</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="alternarModoOscuro()">{{ modoOscuro() ? 'Modo claro' : 'Modo oscuro' }}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <main class="registro-container">
+    <section class="form-card">
+      <div class="eyebrow">FORMULARIO REACTIVO</div>
+      <h1>Crear cuenta</h1>
+      <p class="intro">Completa tus datos para registrarte.</p>
+
+      <form [formGroup]="registroForm" (ngSubmit)="onSubmit()" novalidate>
+        <ion-item>
+          <ion-input label="Nombre completo" labelPlacement="floating" type="text"
+            autocomplete="name" formControlName="nombre"></ion-input>
+        </ion-item>
+        @if (f.nombre.touched && f.nombre.errors) {
+          <ion-note color="danger">{{ f.nombre.errors['required'] ? 'El nombre es obligatorio.' : 'Mínimo 3 caracteres.' }}</ion-note>
+        }
+
+        <ion-item>
+          <ion-input label="Correo electrónico" labelPlacement="floating" type="email"
+            inputmode="email" autocomplete="email" formControlName="email"></ion-input>
+        </ion-item>
+        @if (f.email.touched && f.email.errors) {
+          <ion-note color="danger">Introduce un correo electrónico válido.</ion-note>
+        }
+
+        <ion-item>
+          <ion-input label="Contraseña" labelPlacement="floating" type="password"
+            autocomplete="new-password" formControlName="password"></ion-input>
+        </ion-item>
+        @if (f.password.touched && f.password.errors) {
+          <ion-note color="danger">Mínimo 8 caracteres, con letras y números.</ion-note>
+        }
+
+        <ion-item>
+          <ion-input label="Fecha de nacimiento" labelPlacement="floating" type="date"
+            [max]="hoy" formControlName="fechaNacimiento"></ion-input>
+        </ion-item>
+        @if (f.fechaNacimiento.touched && f.fechaNacimiento.errors) {
+          <ion-note color="danger">
+            {{ f.fechaNacimiento.errors['fechaFutura'] ? 'La fecha no puede ser posterior a hoy.' : 'Selecciona tu fecha de nacimiento.' }}
+          </ion-note>
+        }
+
+        <ion-button class="submit-button" expand="block" type="submit" [disabled]="isSubmitting()">
+          {{ isSubmitting() ? 'Enviando...' : 'Registrarse' }}
+        </ion-button>
+      </form>
+
+      @if (datosEnviados) {
+        <div class="pdf-section">
+          <p>Último envío completado correctamente.</p>
+          <ion-button expand="block" fill="outline" (click)="descargarPDF()">Descargar datos en PDF</ion-button>
+        </div>
+      }
+
+      <ion-button expand="block" fill="clear" routerLink="/driven">Comparar con Template-Driven →</ion-button>
+    </section>
+    <p class="footer-note">Práctica de Ionic + Angular · Reactive Forms</p>
+  </main>
+</ion-content>

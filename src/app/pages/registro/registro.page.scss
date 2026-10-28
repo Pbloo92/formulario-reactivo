@@ -1,0 +1,12 @@
+.registro-container { width: 100%; max-width: 620px; margin: 0 auto; padding: 18px 0 32px; }
+.form-card { padding: clamp(18px, 5vw, 34px); border-radius: 22px; background: var(--ion-card-background, var(--ion-background-color)); box-shadow: 0 12px 36px rgb(26 34 80 / 9%); }
+.eyebrow { color: var(--ion-color-primary); font-size: .75rem; font-weight: 800; letter-spacing: .12em; }
+h1 { font-size: clamp(1.7rem, 5vw, 2.3rem); margin: 10px 0 8px; }
+.intro, .pdf-section p { color: var(--ion-color-medium); line-height: 1.5; }
+form { margin-top: 24px; }
+ion-item { --border-radius: 12px; --background: var(--ion-background-color); margin-bottom: 12px; border-radius: 12px; }
+ion-note { display: block; padding: 0 12px 12px; }
+.submit-button { margin-top: 26px; min-height: 48px; }
+.pdf-section { border-top: 1px solid var(--ion-color-step-150); margin-top: 24px; padding-top: 16px; }
+.footer-note { text-align: center; font-size: .8rem; color: var(--ion-color-medium); padding: 12px; }
+@media (max-width: 480px) { .registro-container { padding-top: 0; } .form-card { border-radius: 14px; } }

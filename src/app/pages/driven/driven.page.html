@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>Template-Driven Forms</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <main class="driven-container">
+    <section class="form-card">
+      <div class="eyebrow">FORMULARIO BASADO EN PLANTILLA</div>
+      <h1>Crear cuenta</h1>
+      <p class="intro">Este formulario utiliza FormsModule y ngModel.</p>
+
+      <form #registro="ngForm" (ngSubmit)="onSubmit(registro)" novalidate>
+        <ion-item>
+          <ion-input label="Nombre completo" labelPlacement="floating" name="nombre" type="text"
+            [(ngModel)]="nombre" required minlength="3" #nombreControl="ngModel"></ion-input>
+        </ion-item>
+        @if (nombreControl.invalid && nombreControl.touched) {
+          <ion-note color="danger">Introduce un nombre de al menos 3 caracteres.</ion-note>
+        }
+
+        <ion-item>
+          <ion-input label="Correo electrónico" labelPlacement="floating" name="email" type="email"
+            [(ngModel)]="email" required email #emailControl="ngModel"></ion-input>
+        </ion-item>
+        @if (emailControl.invalid && emailControl.touched) {
+          <ion-note color="danger">Introduce un correo electrónico válido.</ion-note>
+        }
+
+        <ion-item>
+          <ion-input label="Contraseña" labelPlacement="floating" name="password" type="password"
+            autocomplete="new-password" [(ngModel)]="password" required
+            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" #passwordControl="ngModel"></ion-input>
+        </ion-item>
+        @if (passwordControl.invalid && passwordControl.touched) {
+          <ion-note color="danger">Mínimo 8 caracteres, con letras y números.</ion-note>
+        }
+
+        <ion-item>
+          <ion-input label="Fecha de nacimiento" labelPlacement="floating" name="fechaNacimiento" type="date"
+            [max]="hoy" [(ngModel)]="fechaNacimiento" required #fechaControl="ngModel"></ion-input>
+        </ion-item>
+        @if ((fechaControl.invalid && fechaControl.touched) || fechaFuturaError) {
+          <ion-note color="danger">
+            {{ fechaFuturaError ? 'La fecha no puede ser posterior a hoy.' : 'Selecciona tu fecha de nacimiento.' }}
+          </ion-note>
+        }
+
+        <ion-button expand="block" type="submit">Enviar formulario</ion-button>
+      </form>
+
+      @if (enviado) {
+        <ion-note color="success">Formulario enviado correctamente.</ion-note>
+      }
+      <ion-button expand="block" fill="clear" routerLink="/registro">← Volver al formulario reactivo</ion-button>
+    </section>
+    <p class="footer-note">Práctica de Ionic + Angular · Template-Driven Forms</p>
+  </main>
+</ion-content>
